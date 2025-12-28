@@ -1,10 +1,10 @@
 import streamlit as st
 import os
+from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.vectorstores import FAISS
-from PyPDF2 import PdfReader
 
 st.set_page_config(page_title="RAG Chatbot for CCP", layout="wide")
 
@@ -17,7 +17,9 @@ def load_documents():
         if file.endswith(".pdf"):
             pdf = PdfReader(os.path.join("data", file))
             for page in pdf.pages:
-                text += page.extract_text() + "\n"
+                page_text = page.extract_text()
+                if page_text:
+                    text += page_text + "\n"
     return text
 
 # ----------- Build Vector DB -----------
