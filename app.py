@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.vectorstores import FAISS
 from PyPDF2 import PdfReader
